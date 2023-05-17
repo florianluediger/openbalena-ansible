@@ -1,0 +1,29 @@
+name: Update submodules in parent repositories
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update submodules in AWS terraform repository
+        env:
+          OPENBALENA_TERRAFORM_AWS_TOKEN: ${{ secrets.OPENBALENA_TERRAFORM_AWS_TOKEN }}
+        run: |
+          git clone --recurse-submodules https://florianluediger:$OPENBALENA_TERRAFORM_AWS_TOKEN@github.com/florianluediger/openbalena-terraform-aws.git
+          
+          cd openbalena-terraform-aws
+          git config user.name "Florian Lüdiger"
+          git config user.email "florian.luediger@googlemail.com"
+          
+          git submodule update --remote
+          git add .
+          git status
+          git commit -m "Update Ansible Playbook submodule"
+          
+          git push
