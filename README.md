@@ -3,8 +3,11 @@
 ## Project setup
 
 This playbook expects a Linux server that is reachable via a domain with open ports 22,80,443 and 3128.
+The domain needs to be configured so that CNAME records for the following subdomains point to your server: api, registry, vpn, s3, tunnel
+
 Specify your configuration details in the `inventory.yaml` file.
 The `username` and `password` credentials will later be used to authenticate with your OpenBalena instance.
+
 Additionally, you will need an SSH key file that allows connecting to your server.
 You can also change the location of this file in the `inventory.yaml` file.
 
