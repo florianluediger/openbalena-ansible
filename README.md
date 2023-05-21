@@ -37,3 +37,8 @@ This enables you to use the balena CLI as usual.
 balena login
 balena fleets
 ```
+
+## Known issues
+
+If the task `Run quickstart script` runs forever, this might be because an issue of the OpenBalena quickstart script.
+Have a look at this ticket for further information: [Quickstart script prompting for PEM password when using OpenSSL 3](https://github.com/balena-io/open-balena/issues/169)
