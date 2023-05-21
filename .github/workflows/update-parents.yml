@@ -13,11 +13,27 @@ jobs:
     steps:
       - name: Update submodules in AWS terraform repository
         env:
-          OPENBALENA_TERRAFORM_AWS_TOKEN: ${{ secrets.OPENBALENA_TERRAFORM_AWS_TOKEN }}
+          COMMIT_TOKEN: ${{ secrets.COMMIT_TOKEN }}
         run: |
-          git clone --recurse-submodules https://florianluediger:$OPENBALENA_TERRAFORM_AWS_TOKEN@github.com/florianluediger/openbalena-terraform-aws.git
+          git clone --recurse-submodules https://florianluediger:$COMMIT_TOKEN@github.com/florianluediger/openbalena-terraform-aws.git
           
           cd openbalena-terraform-aws
+          git config user.name "Florian Lüdiger"
+          git config user.email "florian.luediger@googlemail.com"
+          
+          git submodule update --remote
+          git add .
+          git status
+          git commit -m "Update Ansible Playbook submodule"
+          
+          git push
+      - name: Update submodules in Azure terraform repository
+        env:
+          COMMIT_TOKEN: ${{ secrets.COMMIT_TOKEN }}
+        run: |
+          git clone --recurse-submodules https://florianluediger:$COMMIT_TOKEN@github.com/florianluediger/openbalena-terraform-azure.git
+          
+          cd openbalena-terraform-azure
           git config user.name "Florian Lüdiger"
           git config user.email "florian.luediger@googlemail.com"
           
